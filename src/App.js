@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import BooksAPI from "./api";
-// import * as BooksAPI from './BooksAPI'
-import "./App.css";
 import { BooksView, SearchView, PageNotFound } from "./views";
+import "./App.css";
+
 
 class BooksApp extends React.Component {
   constructor(props) {
