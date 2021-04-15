@@ -1,6 +1,9 @@
 import React from "react";
 
-const Book = (props) => {
+const Book = ({book, shelfValue}) => {
+  const {title, authors, imageLinks} = book
+  const thumbnail = imageLinks && imageLinks.thumbnail? imageLinks.thumbnail: ''
+  console.log(thumbnail)
   return (
     <div className="book">
       <div className="book-top">
@@ -10,11 +13,11 @@ const Book = (props) => {
             width: 128,
             height: 193,
             backgroundImage:
-              'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")',
+              `url(${thumbnail})`,
           }}
         />
         <div className="book-shelf-changer">
-          <select>
+          <select value={shelfValue}>
             <option value="move" disabled>
               Move to...
             </option>
@@ -25,8 +28,8 @@ const Book = (props) => {
           </select>
         </div>
       </div>
-      <div className="book-title">To Kill a Mockingbird</div>
-      <div className="book-authors">Harper Lee</div>
+      <div className="book-title">{title}</div>
+      <div className="book-authors">{authors.join(', ')}</div>
     </div>
   );
 };
