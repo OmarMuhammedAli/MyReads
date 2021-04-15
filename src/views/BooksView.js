@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 class BooksView extends Component {
   render() {
-    const { books } = this.props;
+    const { books, onShelfChange } = this.props;
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -22,16 +22,19 @@ class BooksView extends Component {
                 books={books.filter(
                   (book) => book.shelf === "currentlyReading"
                 )}
+                onShelfChange={onShelfChange}
               />
               <BookShelf
                 title="Want to Read"
                 value='wantToRead'
                 books={books.filter((book) => book.shelf === "wantToRead")}
+                onShelfChange={onShelfChange}
               />
               <BookShelf
                 title="Read"
                 value='read'
                 books={books.filter((book) => book.shelf === "read")}
+                onShelfChange={onShelfChange}
               />
             </div>
           )}
@@ -48,5 +51,6 @@ class BooksView extends Component {
 
 BooksView.propTypes = {
   books: PropTypes.array.isRequired,
+  onShelfChange: PropTypes.func.isRequired,
 };
 export default BooksView;

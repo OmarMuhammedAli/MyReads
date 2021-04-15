@@ -1,9 +1,9 @@
 import React from "react";
 
-const Book = ({book, shelfValue}) => {
+const Book = ({book, shelfValue, onShelfChange}) => {
   const {title, authors, imageLinks} = book
-  const thumbnail = imageLinks && imageLinks.thumbnail? imageLinks.thumbnail: ''
-  console.log(thumbnail)
+  const thumbnail = imageLinks.thumbnail? imageLinks.thumbnail: ''
+  
   return (
     <div className="book">
       <div className="book-top">
@@ -17,7 +17,7 @@ const Book = ({book, shelfValue}) => {
           }}
         />
         <div className="book-shelf-changer">
-          <select value={shelfValue}>
+          <select value={shelfValue} onChange={(event) => onShelfChange(book, event.target.value)}>
             <option value="move" disabled>
               Move to...
             </option>

@@ -1,40 +1,59 @@
-import React from 'react'
-import {Route, Switch, Redirect} from 'react-router-dom'
-import BooksAPI from './api'
+import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import BooksAPI from "./api";
 // import * as BooksAPI from './BooksAPI'
-import './App.css'
-import { 
-  BooksView,
-  SearchView,
-  PageNotFound
- } from './views'
- 
+import "./App.css";
+import { BooksView, SearchView, PageNotFound } from "./views";
+
 class BooksApp extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      books: []
-    }
+      books: [],
+    };
   }
-  async componentDidMount() {
-    const books = await BooksAPI.getAll()
-    this.setState({
-      books
+  handleShelfChange = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      const {books} = this.state
+      book.shelf = shelf
+      this.setState({
+        books: [...books.filter(bk => bk.id !== book.id), book]
+      })
     })
-    console.log(this.state.books)
+    .catch(e => console.error(e));
+  };
+  async componentDidMount() {
+    const books = await BooksAPI.getAll().catch((e) => console.error(e));
+    this.setState({
+      books,
+    });
+    console.log(this.state.books);
   }
   render() {
     return (
       <div className="app">
         <Switch>
-          <Route exact path='/' render={() => <BooksView books={this.state.books}/>}/>
-          <Route exact path='/search' render={() => <SearchView books={this.state.books}/>}/>
-          <Route exact path='/404' component={PageNotFound}/>
-          <Redirect to='/404'/>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <BooksView
+                books={this.state.books}
+                onShelfChange={this.handleShelfChange}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/search"
+            render={() => <SearchView books={this.state.books} />}
+          />
+          <Route exact path="/404" component={PageNotFound} />
+          <Redirect to="/404" />
         </Switch>
       </div>
-    )
+    );
   }
 }
 
-export default BooksApp
+export default BooksApp;
