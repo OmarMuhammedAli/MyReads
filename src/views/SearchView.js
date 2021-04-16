@@ -113,6 +113,7 @@ class SearchView extends Component {
             }
             return result;
           }),
+
           resultsExist: true,
         }));
       }
