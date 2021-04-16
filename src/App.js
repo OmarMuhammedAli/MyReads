@@ -4,7 +4,6 @@ import BooksAPI from "./api";
 import { BooksView, SearchView, PageNotFound } from "./views";
 import "./App.css";
 
-
 class BooksApp extends React.Component {
   constructor(props) {
     super(props);
@@ -13,14 +12,15 @@ class BooksApp extends React.Component {
     };
   }
   handleShelfChange = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(() => {
-      const {books} = this.state
-      book.shelf = shelf
-      this.setState({
-        books: [...books.filter(bk => bk.id !== book.id), book]
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        const { books } = this.state;
+        book.shelf = shelf;
+        this.setState({
+          books: [...books.filter((bk) => bk.id !== book.id), book],
+        });
       })
-    })
-    .catch(e => console.error(e));
+      .catch((e) => console.error(e));
   };
   async componentDidMount() {
     const books = await BooksAPI.getAll().catch((e) => console.error(e));
@@ -30,6 +30,7 @@ class BooksApp extends React.Component {
     console.log(this.state.books);
   }
   render() {
+    const {books} = this.state
     return (
       <div className="app">
         <Switch>
@@ -38,7 +39,7 @@ class BooksApp extends React.Component {
             path="/"
             render={() => (
               <BooksView
-                books={this.state.books}
+                books={books}
                 onShelfChange={this.handleShelfChange}
               />
             )}
@@ -46,7 +47,12 @@ class BooksApp extends React.Component {
           <Route
             exact
             path="/search"
-            render={() => <SearchView books={this.state.books} />}
+            render={() => (
+              <SearchView
+                books={books}
+                onShelfChange={this.handleShelfChange}
+              />
+            )}
           />
           <Route exact path="/404" component={PageNotFound} />
           <Redirect to="/404" />
