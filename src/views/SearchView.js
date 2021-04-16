@@ -3,6 +3,88 @@ import { Link } from "react-router-dom";
 import BooksAPI from "../api";
 import { Book } from "../components";
 
+const SEARCH_TERMS = [
+  "Android",
+  "Art",
+  "Artificial Intelligence",
+  "Astronomy",
+  "Austen",
+  "Baseball",
+  "Basketball",
+  "Bhagat",
+  "Biography",
+  "Brief",
+  "Business",
+  "Camus",
+  "Cervantes",
+  "Christie",
+  "Classics",
+  "Comics",
+  "Cook",
+  "Cricket",
+  "Cycling",
+  "Desai",
+  "Design",
+  "Development",
+  "Digital Marketing",
+  "Drama",
+  "Drawing",
+  "Dumas",
+  "Education",
+  "Everything",
+  "Fantasy",
+  "Film",
+  "Finance",
+  "First",
+  "Fitness",
+  "Football",
+  "Future",
+  "Games",
+  "Gandhi",
+  "Homer",
+  "Horror",
+  "Hugo",
+  "Ibsen",
+  "Journey",
+  "Kafka",
+  "King",
+  "Lahiri",
+  "Larsson",
+  "Learn",
+  "Literary Fiction",
+  "Make",
+  "Manage",
+  "Marquez",
+  "Money",
+  "Mystery",
+  "Negotiate",
+  "Painting",
+  "Philosophy",
+  "Photography",
+  "Poetry",
+  "Production",
+  "Programming",
+  "React",
+  "Redux",
+  "River",
+  "Robotics",
+  "Rowling",
+  "Satire",
+  "Science Fiction",
+  "Shakespeare",
+  "Singh",
+  "Swimming",
+  "Tale",
+  "Thrun",
+  "Time",
+  "Tolstoy",
+  "Travel",
+  "Ultimate",
+  "Virtual Reality",
+  "Web Development",
+  "iOS",
+];
+
 class SearchView extends Component {
   state = {
     searchResults: [],
@@ -70,7 +152,14 @@ class SearchView extends Component {
                 ))}
             </ol>
           ) : (
-            <h1>No Results Found!</h1>
+            <div>
+              <h1>No Results Found!</h1>
+              <h3>
+                Can't find what you're looking for? Try using the following
+                search terms:
+              </h3>
+              <p>{SEARCH_TERMS.join(" - ")}</p>
+            </div>
           )}
         </div>
       </div>
