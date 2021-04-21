@@ -33,7 +33,7 @@ To get started developing right away:
     │   └── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
     ├── components # Contains the leveraged to build the UI.
     │   ├── Book.js # Represents a single book.
-    |   └── BookShelf.js # Represents book shelf that categorizes the books.   
+    │   └── BookShelf.js # Represents book shelf that categorizes the books.   
     ├── icons # Helpful images for your app. Use at your discretion.
     │   ├── add.svg
     │   ├── arrow-back.svg
